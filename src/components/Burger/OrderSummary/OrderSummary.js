@@ -1,6 +1,8 @@
 import React ,{Component} from 'react';
-import Button from '../../UI/Button/Button'
-
+import Button from '../../UI/Button/Button';
+import {Link, Route, Switch} from 'react-router-dom';
+import BurgerBuilder from '../../../containers/BurgerBuilder/BurgerBuilder';
+import Checkout from '../../../containers/Checkout/Checkout';
 class Summary extends Component {
     componentDidUpdate(){
         console.log('Updated');
@@ -20,12 +22,18 @@ class Summary extends Component {
                 </ul>
                 <h2>Total: ${this.props.price}</h2>
                 <p>Continue to checkout?</p> 
+           
                 <Button btntype='Danger' clicked={this.props.toggle}>
                     CANCEL
                 </Button>
+            
+             
                 <Button btntype='Success' clicked={this.props.continueToCheckOut}>
                     CONTINUE
                 </Button>
+         
+           
+      
                 {/* <button onClick={props.toggle}>CANCEL</button>
                 <button>CONTINUE</button> */}
                 
