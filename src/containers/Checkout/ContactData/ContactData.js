@@ -2,14 +2,69 @@ import React, { Component } from "react";
 import Button from '../../../components/UI/Button/Button';
 import styles from './ContactData.module.css';
 import axios from '../../../axios-orders';
+import Input from '../../../components/UI/Input/Input';
 class ContactData extends Component{
 state = {
-    name: '',
-    email: '',
-  address: {
-      street: '',
-      postalCode: '',
-  },
+orderForm: {
+ 
+        name:{
+            elementType: 'input',
+            elementConfig: {
+           type: "text",
+           placeholder: "Your Name",
+          
+            },
+            value: "Dony"
+        } ,
+        address: {
+            elementType: 'input',
+            elementConfig: {
+           type: "text",
+           placeholder: "Address",
+          
+            },
+            value: "" 
+        },
+        subcode: {
+            elementType: 'input',
+            elementConfig: {
+           type: "text",
+           placeholder: "Subcode",
+          
+            },
+            value: "Dony"
+        },
+        country: {
+            elementType: 'input',
+            elementConfig: {
+           type: "text",
+           placeholder: "Your Country",
+          
+            },
+            value: "Dony"
+        },
+        email: {
+            elementType: 'input',
+            elementConfig: {
+           type: "email",
+           placeholder: "Your Email",
+          
+            },
+            value: "Dony"
+        },
+        delivery: {
+            elementType: 'select',
+            elementConfig: {
+         options: [
+             {value: "fastest", displayValue: "fastest"},
+             {value: "cheapest", displayValue: "cheapest"}
+         ]
+          
+            },
+            value: "Dony"
+        }
+
+},
   loading: false,
 
 
@@ -21,14 +76,7 @@ orderHandler = () => {
         const order = {
             ingredients: this.props.ingredients,
             totalPrce: this.props.price,
-            customer: {
-                name: 'Dony',
-                address: 'bul.todorov',
-                subcode: '1010',
-                country: 'Bulgaria',
-                email: 'nfcb@gmail.com',
-                delivery: 'fast'
-            }
+           
         }
        axios.post('/orders.json',order).then(response=>{
            console.log('hi')
@@ -45,10 +93,10 @@ render(){
         <div className={styles.ContactData}>
 <h4>Enter your contact data</h4>
 <div className={styles.Form}>
-    <input className={styles.Input}type="text" name="name" placeholder="your name"/>
-    <input className={styles.Input}type="text" name="email" placeholder="your email"/>
-    <input className={styles.Input}type="text" name="street" placeholder="your street"/>
-    <input className={styles.Input}type="text" name="postal code" placeholder="your postal code"/>
+    <Input inputtype="input" type="text" name="name" placeholder="your name"/>
+    <Input inputtype="input" type="text" name="email" placeholder="your email"/>
+    <Input inputtype="input" type="text" name="street" placeholder="your street"/>
+    <Input inputtype="input" type="text" name="postal code" placeholder="your postal code"/>
     <Button btntype="Success" clicked={this.orderHandler}>Order</Button>
 </div>
         </div>
