@@ -72,6 +72,7 @@ orderForm: {
 }
 orderHandler = () => {
 
+
      this.setState({loading: true})
         const order = {
             ingredients: this.props.ingredients,
@@ -87,16 +88,35 @@ orderHandler = () => {
            console.log(error)
        })
 }
+inputChangedHandler = (e, inputIdentifier)=> {
+ const updatedOrderForm = {... this.state.orderForm};
+ const updatedValue = {...updatedOrderForm[inputIdentifier]};
+ updatedValue.value = e.target.value;
+ updatedOrderForm[inputIdentifier] = updatedValue;
+ this.setState({orderForm: updatedOrderForm});
+}
 render(){
+const formElementsArray = [];
+for (let key in this.state.orderForm){
+    formElementsArray.push({
+        id: key,
+        config: this.state.orderForm[key]
 
+    })
+}
+const inputElements = formElementsArray.map(formEl => {
+    return (<Input key={formEl.id} elementType={formEl.config.elementType} 
+        value={formEl.config.value} 
+        elementConfig={formEl.config.elementConfig}
+        changed={(e)=> {
+            this.inputChangedHandler(e,formEl.id)
+        }}/>)
+})
     return (
         <div className={styles.ContactData}>
 <h4>Enter your contact data</h4>
 <div className={styles.Form}>
-    <Input inputtype="input" type="text" name="name" placeholder="your name"/>
-    <Input inputtype="input" type="text" name="email" placeholder="your email"/>
-    <Input inputtype="input" type="text" name="street" placeholder="your street"/>
-    <Input inputtype="input" type="text" name="postal code" placeholder="your postal code"/>
+{inputElements}
     <Button btntype="Success" clicked={this.orderHandler}>Order</Button>
 </div>
         </div>
