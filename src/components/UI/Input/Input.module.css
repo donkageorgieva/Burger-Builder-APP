@@ -12,8 +12,8 @@
 
 .InputElement {
     outline: none;
-    border: 1px solid salmon;
-    background-color: pink;
+    border: 1px solid pink;
+    background-color: rgb(214, 214, 214);
     padding: 6px 10px;
 
 }
@@ -21,7 +21,10 @@
 .InputElement:focus {
     outline: none;
    
-    background-color: darksalmon;
+ 
   
     
+}
+.Invalid{
+    background-color: salmon;
 }
